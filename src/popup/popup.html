@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="../assets/styles/main.css">
+  <link rel="stylesheet" id="theme-style" href="../assets/styles/themes/light.css">
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <button class="new-chat">+ New Chat</button>
+      <div class="chat-history" id="chat-history"></div>
+    </div>
+    
+    <div class="main-content">
+      <div class="messages" id="messages"></div>
+      <div class="input-area">
+        <textarea id="user-input" placeholder="Type your message..."></textarea>
+        <button id="send-btn" class="send-button">
+          <span class="loader" id="loader"></span>
+          Send
+        </button>
+      </div>
+    </div>
+  </div>
+  <script src="popup.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+{
+  "appName": {
+    "message": "ChatGPT Assistant",
+    "description": "Название расширения"
+  },
+  "appDesc": {
+    "message": "Browser extension for interacting with ChatGPT AI",
+    "description": "Описание расширения"
+  },
+  "newChatBtn": {
+    "message": "New Chat",
+    "description": "Кнопка нового чата"
+  },
+  "inputPlaceholder": {
+    "message": "Type your message...",
+    "description": "Плейсхолдер поля ввода"
+  },
+  "sendBtn": {
+    "message": "Send",
+    "description": "Кнопка отправки сообщения"
+  },
+  "apiKeyPlaceholder": {
+    "message": "Enter API Key",
+    "description": "Плейсхолдер для API ключа"
+  },
+  "saveKeyBtn": {
+    "message": "Save",
+    "description": "Кнопка сохранения настроек"
+  },
+  "settingsTitle": {
+    "message": "Settings",
+    "description": "Заголовок секции настроек"
+  },
+  "errorMessage": {
+    "message": "Error: $details$",
+    "description": "Общее сообщение об ошибке",
+    "placeholders": {
+      "details": {
+        "content": "$1",
+        "example": "API key not found"
+      }
+    }
+  },
+  "contextMenuTitle": {
+    "message": "Ask ChatGPT",
+    "description": "Название пункта контекстного меню"
+  }
+}
