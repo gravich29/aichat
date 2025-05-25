@@ -3,7 +3,7 @@ document.getElementById('send-btn').addEventListener('click', async () => {
   const character = document.getElementById('character-select').value;
   const prompt = `Imagine you are a ${character}. ${userInput}`;
   const response = await fetchChatGPTResponse(prompt);
-  displayMessage(response);
+  displayMessage(response, character);
   document.getElementById('user-input').value = ''; // Clear input
 });
 
@@ -12,7 +12,7 @@ document.getElementById('new-chat-btn').addEventListener('click', () => {
 });
 
 async function fetchChatGPTResponse(prompt) {
-  const API_KEY = 'sk-a4d48058a9164094b04c1475120f6de7';
+  const API_KEY = 'sk-a4d48058a9164094b04c1475120f6de7'; // Note: Replace with secure storage
   const API_URL = 'https://api.openai.com/v1/chat/completions';
 
   try {
@@ -36,10 +36,17 @@ async function fetchChatGPTResponse(prompt) {
   }
 }
 
-function displayMessage(message) {
+function displayMessage(message, character) {
   const messagesDiv = document.getElementById('messages');
   const messageElement = document.createElement('div');
-  messageElement.textContent = message;
+  messageElement.className = 'message';
+  const avatar = document.createElement('div');
+  avatar.className = `avatar ${character}`;
+  avatar.textContent = character[0].toUpperCase(); // First letter of character
+  const text = document.createElement('span');
+  text.textContent = message;
+  messageElement.appendChild(avatar);
+  messageElement.appendChild(text);
   messagesDiv.appendChild(messageElement);
   messagesDiv.scrollTop = messagesDiv.scrollHeight; // Auto-scroll to latest message
 }
