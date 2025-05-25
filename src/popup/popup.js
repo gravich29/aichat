@@ -1,7 +1,14 @@
 document.getElementById('send-btn').addEventListener('click', async () => {
   const userInput = document.getElementById('user-input').value;
-  const response = await fetchChatGPTResponse(userInput);
+  const character = document.getElementById('character-select').value;
+  const prompt = `Imagine you are a ${character}. ${userInput}`;
+  const response = await fetchChatGPTResponse(prompt);
   displayMessage(response);
+  document.getElementById('user-input').value = ''; // Clear input
+});
+
+document.getElementById('new-chat-btn').addEventListener('click', () => {
+  document.getElementById('messages').innerHTML = ''; // Clear chat
 });
 
 async function fetchChatGPTResponse(prompt) {
@@ -17,7 +24,7 @@ async function fetchChatGPTResponse(prompt) {
       },
       body: JSON.stringify({
         model: "gpt-3.5-turbo",
-        messages: [{role: "user", content: prompt}]
+        messages: [{ role: "user", content: prompt }]
       })
     });
 
@@ -34,34 +41,5 @@ function displayMessage(message) {
   const messageElement = document.createElement('div');
   messageElement.textContent = message;
   messagesDiv.appendChild(messageElement);
-}
-
-async function handleStreamingResponse(response) {
-  const reader = response.body.getReader();
-  const decoder = new TextDecoder();
-  let result = '';
-
-  while(true) {
-    const { done, value } = await reader.read();
-    if(done) break;
-    
-    const chunk = decoder.decode(value);
-    const lines = chunk.split('\n');
-    
-    for(const line of lines) {
-      const message = line.replace(/^data: /, '');
-      if(message === '[DONE]') return;
-      
-      try {
-        const parsed = JSON.parse(message);
-        const content = parsed.choices[0].delta.content;
-        if(content) {
-          result += content;
-          updateLastMessage(result);
-        }
-      } catch(e) {
-        console.error('Parsing error:', e);
-      }
-    }
-  }
+  messagesDiv.scrollTop = messagesDiv.scrollHeight; // Auto-scroll to latest message
 }
